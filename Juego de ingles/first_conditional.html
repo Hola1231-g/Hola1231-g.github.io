@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Conditional Practice</title>
+    <link rel="stylesheet" href="first_conditional.css">
+    <script>
+        // Lista de oraciones
+        const sentences = [
+            {
+                sentence: "If it ______ (rain), we ______ (stay) home.",
+                correctPart1: "rains",
+                correctPart2: "will stay",
+                optionsPart1: ["rains", "rain", "ran", "will rain", "raining", "have rained", "is raining"],
+                optionsPart2: ["will stay", "stayed", "stays", "is staying", "stay", "was staying", "has stayed"]
+            },
+            {
+                sentence: "If she ______ (study), she ______ (pass) the exam.",
+                correctPart1: "studies",
+                correctPart2: "will pass",
+                optionsPart1: ["studies", "study", "studied", "will study", "is studying", "was studying", "has studied"],
+                optionsPart2: ["will pass", "passes", "passed", "is passing", "pass", "was passing", "has passed"]
+            },
+            // Más oraciones pueden añadirse aquí
+        ];
+
+        let currentSentenceIndex = 0;
+        let currentPart = 1; // 1: Primera parte, 2: Segunda parte
+        let incorrectAnswers = 0; // Contador de respuestas incorrectas actuales
+        let previousIncorrectAnswers = 0; // Contador de respuestas incorrectas previas
+
+        // Función para mezclar opciones
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Cargar la oración actual
+        function loadSentence() {
+            const current = sentences[currentSentenceIndex];
+
+            // Mostrar la oración con la parte completada si ya se respondió correctamente
+            const sentenceText = currentPart === 1
+                ? current.sentence
+                : current.sentence.replace("______ (rain)", current.correctPart1); // Modificar según la primera parte respondida
+            document.getElementById("sentence").textContent = sentenceText;
+
+            const options = currentPart === 1 ? [...current.optionsPart1] : [...current.optionsPart2];
+            shuffle(options);
+
+            const optionsDiv = document.getElementById("options");
+            optionsDiv.innerHTML = "";
+            options.forEach(option => {
+                const button = document.createElement("button");
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option);
+                optionsDiv.appendChild(button);
+            });
+        }
+
+        // Verificar respuesta
+        function checkAnswer(selected) {
+            const current = sentences[currentSentenceIndex];
+            const correctAnswer = currentPart === 1 ? current.correctPart1 : current.correctPart2;
+
+            if (selected === correctAnswer) {
+                alert("¡Correcto!");
+                if (currentPart === 1) {
+                    currentPart = 2; // Cambiar a la segunda parte
+                    loadSentence();
+                } else {
+                    currentSentenceIndex++;
+                    currentPart = 1; // Reiniciar a la primera parte de la siguiente oración
+                    if (currentSentenceIndex < sentences.length) {
+                        loadSentence();
+                    } else {
+                        endGame(); // Terminar el juego
+                    }
+                }
+            } else {
+                alert("Intenta de nuevo.");
+                incorrectAnswers++; // Incrementar contador de respuestas incorrectas
+            }
+        }
+
+        // Finalizar juego
+        function endGame() {
+            const message = `Terminaste el juego. Respuestas incorrectas en esta partida: ${incorrectAnswers}.
+Respuestas incorrectas acumuladas (incluyendo esta partida): ${previousIncorrectAnswers + incorrectAnswers}.
+¿Qué deseas hacer ahora?`;
+
+            if (confirm(`${message}\n\nHaz clic en Aceptar para intentar de nuevo o en Cancelar para volver al inicio.`)) {
+                // Intentar de nuevo
+                previousIncorrectAnswers += incorrectAnswers;
+                incorrectAnswers = 0;
+                currentSentenceIndex = 0;
+                currentPart = 1;
+                loadSentence();
+            } else {
+                // Volver al inicio
+                window.location.href = "inicio.html";
+            }
+        }
+
+        // Inicializar el juego al cargar la página
+        window.onload = loadSentence;
+    </script>
+</head>
+<body>
+    <h1>First Conditional Practice</h1>
+    <p id="sentence"></p>
+    <div id="options"></div>
+</body>
+</html>

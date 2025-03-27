@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escoja un juego de preferencia</title>
+    <link rel="stylesheet" href="inicio.css">
+    <script>
+        // Función para mostrar el mensaje de confirmación
+        function confirmacionJuego(nombre, enlace) {
+            const confirmar = confirm(`¿Estás seguro que quieres jugar ${nombre}?`);
+            if (confirmar) {
+                window.location.href = enlace;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Escoja un juego de preferencia</h1>
+    <div class="grid-container">
+        <div class="game">
+            <img class="imagen" src="imagenes/preseconti.jpg" alt="Verb TO BE" onclick="confirmacionJuego('Verb TO BE', 'verb_to_be.html')">
+            <a href="verb_to_be.html">Verb TO BE</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/preseperfe.jpg" alt="Present Simple" onclick="confirmacionJuego('Present Simple', 'present_simple.html')">
+            <a href="present_simple.html">Present Simple</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/presesimple.png" alt="Present Continuous" onclick="confirmacionJuego('Present Continuous', 'present_continuous.html')">
+            <a href="present_continuous.html">Present Continuous</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/goingto.jpg" alt="Present Perfect" onclick="confirmacionJuego('Present Perfect', 'present_perfect.html')">
+            <a href="present_perfect.html">Present Perfect</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/firstcondi.webp" alt="Modal Verbs" onclick="confirmacionJuego('Modal Verbs', 'modal_verbs.html')">
+            <a href="modal_verbs.html">Modal Verbs</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/modalverb.png" alt="First Conditional" onclick="confirmacionJuego('First Conditional', 'first_conditional.html')">
+            <a href="first_conditional.html">First Conditional</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/secondcond.png" alt="Second Conditional" onclick="confirmacionJuego('Second Conditional', 'second_conditional.html')">
+            <a href="second_conditional.html">Second Conditional</a>
+        </div>
+        <div class="game">
+            <img class="imagen" src="imagenes/tense.jpg" alt="Going to" onclick="confirmacionJuego('Going to', 'going_to.html')">
+            <a href="going_to.html">Going to</a>
+        </div>
+    </div>
+    <div class="grid-center">
+        <div class="game">
+            <img class="imagen" src="imagenes/Vertub.jpg" alt="Phrase All Verbs" onclick="confirmacionJuego('Phrase All Verbs', 'phrase_all_verbs.html')">
+            <a href="phrase_all_verbs.html">Phrase All Verbs</a>
+        </div>
+    </div>
+</body>
+</html>
+
+
